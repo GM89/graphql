@@ -9,6 +9,7 @@ export class JobBoard extends Component {
     //we need to set a initial value, bc while fetch is beign processed this.state will be loaded
     this.state = {jobs: []};
   }
+  
 
 
 //We load the fetch data when the component has been mounted, that is, displayed on the page. 

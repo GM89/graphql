@@ -22,6 +22,35 @@ export async function loadJobs(){
         })
 
     });
+    console.log("request.js is downloading from server")
     const responseBody = await response.json();
-    return response.body.data.jobs;
+    return responseBody.data.jobs;
+}
+
+
+
+export async function loadJob(id){
+  const response = await fetch(endpointURL,{
+      method: 'POST',
+      headers: {'content-type': 'application/json'},
+      body:JSON.stringify({
+          query:`
+          query JobQuery($id: ID!) {
+            job(id: $id){
+              id
+              title
+              company{
+                id
+                name
+              }
+              description
+              }
+          }`,
+          variables: {id},
+      })
+  });
+ 
+  const responseBody = await response.json();
+  console.log("load single job ", responseBody)
+  return responseBody.data.jobs;
 }
