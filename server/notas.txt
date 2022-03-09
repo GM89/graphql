@@ -5,3 +5,32 @@ originariamente
     
 yo probaré
     "start": "concurrently \"nodemon server.js\" \"cd ../client && npm start\""
+    
+    
+    ------
+  query per obtenir job i company   
+    query JobQuery($id: ID!) {
+	job(id: $id){
+		id
+		title
+		company{
+			id
+			name
+		}
+		description
+		}
+}
+
+  query per obtenir company
+{
+company(id: "HJRa-DOuG" ){
+id
+name
+description
+}
+}
+
+
+
+
+
