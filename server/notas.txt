@@ -1,0 +1,7 @@
+nodemon
+
+originariamente 
+    "start": "nodemon --ext js,graphql --ignore data/ server.js"
+    
+yo probaré
+    "start": "concurrently \"nodemon server.js\" \"cd ../client && npm start\""
