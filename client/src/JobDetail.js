@@ -5,15 +5,13 @@ import{loadJob} from './requests.js'
 export class JobDetail extends Component {
   constructor(props) {
     super(props);
-
     this.state = {job:null};
   }
 
   async componentDidMount(){
     //treiem el jobId del url, amb params
     const {jobId} = this.props.match.params;
-    console.log("el job Id:", jobId)
-    const job =  await loadJob({jobId});
+    const job =  await loadJob(jobId);
     this.setState({job})
   }
 
