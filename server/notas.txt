@@ -6,31 +6,34 @@ originariamente
 yo probaré
     "start": "concurrently \"nodemon server.js\" \"cd ../client && npm start\""
     
-    
+   
+   
+   login
+   bob@goobook.co
+   bob123
+   
+   alice@facegle.io
+   alice123
     ------
-  query per obtenir job i company   
-    query JobQuery($id: ID!) {
-	job(id: $id){
-		id
-		title
-		company{
-			id
-			name
-		}
-		description
-		}
-}
-
-  query per obtenir company
-{
-company(id: "HJRa-DOuG" ){
-id
-name
-description
-}
+mutation CreateJob($input: CreateJobInput){
+  job: createJob(input: $input){
+		id,
+    title,
+    company {
+        id,
+        title,
+      }
 }
 
 
 
+  "input":{
+    companyId: "SJV0-wdOM",
+    title: "New job 4",
+    description: "test 4",  
+	}
+}
 
 
+------TOKEN
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyeTlwYndkT3oiLCJpYXQiOjE2NDcwNzgxMDN9.jklVp0bvhpZpePVER63jBmA4k9OFeWsFUK2sTNN2b5Y

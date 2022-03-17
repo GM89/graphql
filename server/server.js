@@ -14,6 +14,10 @@ const db = require('./db');
 const port = 9000;
 const jwtSecret = Buffer.from('Zn8Q5tyZ/G1MHltc4F/gTkVJMlrbKiZt', 'base64');
 
+/*this is the middleware that requires token.
+ 'credentialsRequired: false' by default you don't need to be authenticated to access any route 
+ but if you send an access token the expressmiddleware will chck if it's valid
+ */
 const app = express();
 app.use(cors(), bodyParser.json(), expressJwt({
   secret: jwtSecret,
@@ -30,7 +34,14 @@ Why all of this? schema is graphql file not a js file!
 //we need to plug the apollo server in our express applicatons
 const typeDefs = gql(fs.readFileSync('./schema.graphql', {encoding: 'utf8'}));
 const resolvers = require('./resolvers');
-const apolloServer = new ApolloServer({typeDefs, resolvers});
+/* req.users.sub és el usuari Id. amb aquest podem obtenir l'usuari sencer de al database.
+També volem comprovar que req.users existeix(és autentificat)*/
+const context = ({req}) => ({user: req.user && db.users.get(req.user.sub)});
+const apolloServer = new ApolloServer({ 
+  typeDefs, 
+  resolvers, 
+  context
+});
 apolloServer.applyMiddleware({app, path: '/graphql'});
 
 app.post('/login', (req, res) => {

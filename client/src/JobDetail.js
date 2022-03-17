@@ -1,23 +1,22 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import{loadJob} from './requests.js'
+import { loadJob } from './requests';
 
 export class JobDetail extends Component {
   constructor(props) {
     super(props);
-    this.state = {job:null};
+    this.state = {job: null};
   }
 
-  async componentDidMount(){
-    //treiem el jobId del url, amb params
+  async componentDidMount() {
     const {jobId} = this.props.match.params;
-    const job =  await loadJob(jobId);
-    this.setState({job})
+    const job = await loadJob(jobId);
+    this.setState({job});
   }
 
   render() {
     const {job} = this.state;
-    if(!job){
+    if (!job) {
       return null;
     }
     return (
