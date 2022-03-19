@@ -83,6 +83,13 @@ export async function createJob(input) {
       }
     }
   `;
+
+  /* Aqui hay una desestructucation update(cache, mutationResult.
+    En mutationResult.data estan los datos, así que desestructuramos
+    
+    Aquí podemos utilziar el objecto cache para modificar la caché y añadir ael mutationResult.data
+    lo hacemos con cache.writeQuery que lo que hace es guardar el resutlado de la query(en la cahce)
+    */
   const {data: {job}} = await client.mutate({
     mutation,
     variables: {input},
@@ -116,7 +123,10 @@ export async function loadCompany(id) {
 
 
 export async function loadJob(id) {
-  const {data: {job}} = await client.query({query: jobQuery, variables: {id}});
+
+  const {
+    data: { job },
+  } = await client.query({ query: jobQuery, variables: { id } });
   return job;
 }
 
